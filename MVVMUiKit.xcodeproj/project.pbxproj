@@ -16,6 +16,12 @@
 		68ABEA0D2CD4D9D900998F77 /* MVVMUiKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68ABEA0C2CD4D9D900998F77 /* MVVMUiKitTests.swift */; };
 		68ABEA172CD4D9D900998F77 /* MVVMUiKitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68ABEA162CD4D9D900998F77 /* MVVMUiKitUITests.swift */; };
 		68ABEA192CD4D9D900998F77 /* MVVMUiKitUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68ABEA182CD4D9D900998F77 /* MVVMUiKitUITestsLaunchTests.swift */; };
+		68ABEA312CD4DCAA00998F77 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68ABEA302CD4DCAA00998F77 /* NetworkManager.swift */; };
+		68ABEA332CD4DEEF00998F77 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68ABEA322CD4DEEF00998F77 /* User.swift */; };
+		68ABEA352CD4DF1200998F77 /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68ABEA342CD4DF1200998F77 /* LoginRequest.swift */; };
+		68ABEA372CD4F17300998F77 /* LoginRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68ABEA362CD4F17300998F77 /* LoginRepository.swift */; };
+		68ABEA392CD4F4E500998F77 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68ABEA382CD4F4E500998F77 /* LoginViewModel.swift */; };
+		68ABEA3B2CD527D700998F77 /* ProductListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68ABEA3A2CD527D700998F77 /* ProductListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +55,12 @@
 		68ABEA122CD4D9D900998F77 /* MVVMUiKitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MVVMUiKitUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		68ABEA162CD4D9D900998F77 /* MVVMUiKitUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVVMUiKitUITests.swift; sourceTree = "<group>"; };
 		68ABEA182CD4D9D900998F77 /* MVVMUiKitUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVVMUiKitUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		68ABEA302CD4DCAA00998F77 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		68ABEA322CD4DEEF00998F77 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		68ABEA342CD4DF1200998F77 /* LoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
+		68ABEA362CD4F17300998F77 /* LoginRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRepository.swift; sourceTree = "<group>"; };
+		68ABEA382CD4F4E500998F77 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		68ABEA3A2CD527D700998F77 /* ProductListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,13 +111,16 @@
 		68ABE9F42CD4D9D700998F77 /* MVVMUiKit */ = {
 			isa = PBXGroup;
 			children = (
-				68ABE9F52CD4D9D700998F77 /* AppDelegate.swift */,
-				68ABE9F72CD4D9D700998F77 /* SceneDelegate.swift */,
-				68ABE9F92CD4D9D700998F77 /* ViewController.swift */,
-				68ABE9FB2CD4D9D700998F77 /* Main.storyboard */,
-				68ABE9FE2CD4D9D900998F77 /* Assets.xcassets */,
-				68ABEA002CD4D9D900998F77 /* LaunchScreen.storyboard */,
-				68ABEA032CD4D9D900998F77 /* Info.plist */,
+				68ABEA272CD4DA2000998F77 /* App */,
+				68ABEA262CD4DA0D00998F77 /* Models */,
+				68ABEA252CD4DA0000998F77 /* Views */,
+				68ABEA282CD4DA2E00998F77 /* ViewModels */,
+				68ABEA292CD4DA5D00998F77 /* Repositories */,
+				68ABEA2A2CD4DA8C00998F77 /* Services */,
+				68ABEA2B2CD4DAAA00998F77 /* Extensions */,
+				68ABEA2C2CD4DAC200998F77 /* Utilities */,
+				68ABEA2D2CD4DAD300998F77 /* Resources */,
+				68ABEA2E2CD4DB1200998F77 /* Helpers */,
 			);
 			path = MVVMUiKit;
 			sourceTree = "<group>";
@@ -125,6 +140,89 @@
 				68ABEA182CD4D9D900998F77 /* MVVMUiKitUITestsLaunchTests.swift */,
 			);
 			path = MVVMUiKitUITests;
+			sourceTree = "<group>";
+		};
+		68ABEA252CD4DA0000998F77 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				68ABE9F92CD4D9D700998F77 /* ViewController.swift */,
+				68ABEA3A2CD527D700998F77 /* ProductListViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		68ABEA262CD4DA0D00998F77 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				68ABEA322CD4DEEF00998F77 /* User.swift */,
+				68ABEA342CD4DF1200998F77 /* LoginRequest.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		68ABEA272CD4DA2000998F77 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				68ABE9F52CD4D9D700998F77 /* AppDelegate.swift */,
+				68ABE9F72CD4D9D700998F77 /* SceneDelegate.swift */,
+				68ABE9FB2CD4D9D700998F77 /* Main.storyboard */,
+				68ABEA032CD4D9D900998F77 /* Info.plist */,
+				68ABEA002CD4D9D900998F77 /* LaunchScreen.storyboard */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		68ABEA282CD4DA2E00998F77 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				68ABEA382CD4F4E500998F77 /* LoginViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		68ABEA292CD4DA5D00998F77 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				68ABEA362CD4F17300998F77 /* LoginRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		68ABEA2A2CD4DA8C00998F77 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				68ABEA302CD4DCAA00998F77 /* NetworkManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		68ABEA2B2CD4DAAA00998F77 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		68ABEA2C2CD4DAC200998F77 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		68ABEA2D2CD4DAD300998F77 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				68ABE9FE2CD4D9D900998F77 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		68ABEA2E2CD4DB1200998F77 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,8 +356,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68ABEA312CD4DCAA00998F77 /* NetworkManager.swift in Sources */,
+				68ABEA3B2CD527D700998F77 /* ProductListViewController.swift in Sources */,
 				68ABE9FA2CD4D9D700998F77 /* ViewController.swift in Sources */,
 				68ABE9F62CD4D9D700998F77 /* AppDelegate.swift in Sources */,
+				68ABEA372CD4F17300998F77 /* LoginRepository.swift in Sources */,
+				68ABEA392CD4F4E500998F77 /* LoginViewModel.swift in Sources */,
+				68ABEA352CD4DF1200998F77 /* LoginRequest.swift in Sources */,
+				68ABEA332CD4DEEF00998F77 /* User.swift in Sources */,
 				68ABE9F82CD4D9D700998F77 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -444,7 +548,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JFL5BCP2DB;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MVVMUiKit/Info.plist;
+				INFOPLIST_FILE = MVVMUiKit/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -472,7 +576,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JFL5BCP2DB;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = MVVMUiKit/Info.plist;
+				INFOPLIST_FILE = MVVMUiKit/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

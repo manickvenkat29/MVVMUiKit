@@ -8,7 +8,7 @@
 import Foundation
 
 protocol LoginViewModelProtocol: AnyObject {
-    func didReceiveloginResponse(result: Result<User, Error>)
+    func didReceiveloginResponse(result: Result<User, NetworkError>)
 }
 
 class LoginViewModel {
@@ -25,6 +25,7 @@ class LoginViewModel {
         let request = LoginRequest(username: username, password: password, expiresInMins: 30)
         loginNetworkrepo.login(request: request) { [weak self] result in
             guard let self = self else { return }
+            
             self.delegate?.didReceiveloginResponse(result: result)
         }
     }

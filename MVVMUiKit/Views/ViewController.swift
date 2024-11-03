@@ -25,6 +25,10 @@ class ViewController: UIViewController {
         userNameTF.delegate = self
         passwordTF.delegate = self
         activityIndicator.isHidden = true
+        userNameTF.text = "michaelw"
+        passwordTF.text = "michaelwpass"
+        
+        
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(keyboardWillShow),
@@ -74,17 +78,26 @@ class ViewController: UIViewController {
 }
 
 extension ViewController : LoginViewModelProtocol {
-    func didReceiveloginResponse(result: Result<User, any Error>) {
+    func didReceiveloginResponse(result: Result<User, NetworkError>) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.activityIndicator.isHidden = true
             self.activityIndicator.stopAnimating()
             self.view.isUserInteractionEnabled = true
-            
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            if let vc = storyboard.instantiateViewController(withIdentifier: "ProductListID") as? ProductListViewController {
-                self.navigationController?.pushViewController(vc, animated: true)
+            switch result {
+            case .success(let user) :
+                DispatchQueue.main.async {
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    if let vc = storyboard.instantiateViewController(withIdentifier: "ProductListID") as? ProductListViewController {
+                        vc.userName = user.fullname
+//                        vc.email = user.email
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
+                }
+            case .failure(let error) :
+                print(error)
             }
+            
         }
         print(result)
     }

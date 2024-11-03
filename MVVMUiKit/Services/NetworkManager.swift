@@ -7,50 +7,79 @@
 
 import Foundation
 
-typealias LoginResult = (Result<User, Error>) -> Void
+typealias CompletionHandler<T> = (Result<T, NetworkError>) -> Void
+
+
 protocol NetworkManagerProtocol {
-    func post<T:Codable>(urlString: String, body: T, completion: @escaping LoginResult)
+    func request<T:Codable>(urlString: String, method: HttpMethods, body: [String:Any], completion: @escaping CompletionHandler<T>)
 }
 
 class NetworkManager: NetworkManagerProtocol {
-    func post<T>(urlString: String, body: T, completion: @escaping LoginResult) where T:Encodable, T:Decodable {
-        
-        guard let url = URL(string: urlString) else {
-            return completion(.failure(NetworkError.invalidUrl))
-        }
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        do {
-            let encodeJson = try JSONEncoder().encode(body)
-            request.httpBody = encodeJson
-            print("payload : \(encodeJson)")
-        }catch {
-            return completion(.failure(NetworkError.invalidData))
-        }
-        
-        DispatchQueue.global(qos: .background).async {
-            let task = URLSession.shared.dataTask(with: request) { data, response, error in
-                
-                if let error = error {
-                    return completion(.failure(error))
-                }
-                
-                guard let data = data else {
-                    return completion(.failure(NetworkError.noData))
-                }
-                
-                do {
-                    let decodeData = try JSONDecoder().decode(User.self, from: data)
-                    completion(.success(decodeData))
-                }catch {
-                    completion(.failure(NetworkError.decodingError))
-                }
+    
+    static let shared = NetworkManager()
+    
+    init() {}
+    // MARK: Genral method for api request
+    func request<T: Codable>(
+            urlString: String,
+            method: HttpMethods,
+            body: [String:Any],
+            completion: @escaping CompletionHandler<T>) {
+            
+            guard let url = URL(string: urlString) else {
+                completion(.failure(.invalidUrl))
+                return
             }
-            task.resume()
+            
+            var request = URLRequest(url: url)
+            request.httpMethod = method.rawValue
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+                //Check the HTTP methods and handle body accordingly
+                switch method {
+                case .post, .put :
+                    do {
+                        let jsonData = try JSONSerialization.data(withJSONObject: body)
+                        request.httpBody = jsonData
+                    } catch {
+                        completion(.failure(.invalidData))
+                        return
+                    }
+                case .get, .delete:
+                    request.httpBody = nil
+                }
+            // Perform request and pass the result back to the completion handler
+            performRequest(with: request, completion: completion)
         }
+    
+    // MARK: Genral method for perform api request
+    func performRequest<T:Codable>(with urlRequest: URLRequest, completion: @escaping CompletionHandler<T>) {
+        
+        let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+        
+            if let error = error {
+                completion(.failure(.networkError(error)))
+                return
+            }
+            
+            guard let data = data else {
+                completion(.failure(.noData))
+                return
+            }
+            
+            let jsonString = String(data: data, encoding: .utf8)
+            print("Response JSON: \(jsonString ?? "")")
+
+            
+            do {
+                let decodedObject = try JSONDecoder().decode(T.self, from: data)
+                completion(.success(decodedObject))
+            } catch {
+                print("Decoding Error: \(error)")
+                completion(.failure(.decodingError))
+            }
+        }
+        task.resume()
     }
 }
 
@@ -59,6 +88,8 @@ enum NetworkError : Error {
     case invalidUrl
     case noData
     case decodingError
+    case networkError(Error)
+
 }
 
 enum HttpMethods: String {

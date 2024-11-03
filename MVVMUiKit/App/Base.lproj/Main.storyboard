@@ -83,7 +83,7 @@
             </objects>
             <point key="canvasLocation" x="948.85496183206101" y="-2.1126760563380285"/>
         </scene>
-        <!--Product List View Controller-->
+        <!--Products List-->
         <scene sceneID="nDX-qn-zeG">
             <objects>
                 <viewController storyboardIdentifier="ProductListID" useStoryboardIdentifierAsRestorationIdentifier="YES" id="FV7-TS-zV1" customClass="ProductListViewController" customModule="MVVMUiKit" customModuleProvider="target" sceneMemberID="viewController">
@@ -94,13 +94,33 @@
                     <view key="view" contentMode="scaleToFill" id="hEt-J0-HTb">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="9De-lV-sVT">
+                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="FV7-TS-zV1" id="Ot7-Sy-ok9"/>
+                                    <outlet property="delegate" destination="FV7-TS-zV1" id="VoL-Ux-wDL"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="9De-lV-sVT" firstAttribute="top" secondItem="KAw-G0-rYG" secondAttribute="bottom" id="5g1-yz-3Ve"/>
+                            <constraint firstItem="9De-lV-sVT" firstAttribute="leading" secondItem="hEt-J0-HTb" secondAttribute="leading" id="Pev-u1-Mg9"/>
+                            <constraint firstItem="qbJ-45-eoL" firstAttribute="top" secondItem="9De-lV-sVT" secondAttribute="bottom" id="Zys-CS-WS1"/>
+                            <constraint firstAttribute="trailing" secondItem="9De-lV-sVT" secondAttribute="trailing" id="wTD-U5-sNz"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="jO2-36-ntc"/>
+                    <navigationItem key="navigationItem" title="Products List" id="jO2-36-ntc"/>
+                    <connections>
+                        <outlet property="tableView" destination="9De-lV-sVT" id="DOZ-qH-Rgt"/>
+                        <outlet property="userNameTitle" destination="jO2-36-ntc" id="8Fj-Mf-H16"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="43o-od-aWg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1799.2366412213739" y="-2.1126760563380285"/>
+            <point key="canvasLocation" x="2025" y="-118"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="MJL-yL-L2Q">

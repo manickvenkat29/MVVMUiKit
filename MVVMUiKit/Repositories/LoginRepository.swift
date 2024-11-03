@@ -8,20 +8,33 @@
 import Foundation
 
 protocol LoginRepositoryProtocol {
-    func login(request: LoginRequest, completion: @escaping LoginResult)
+    func login(request: LoginRequest, completion: @escaping CompletionHandler<User>)
+    
 }
-
 class LoginRepository: LoginRepositoryProtocol {
+   
 
     
-    private let networkManager: NetworkManagerProtocol
+//    private let networkManager: NetworkManagerProtocol
+//    
+//    init(networkManager: NetworkManagerProtocol = NetworkManager()) {
+//        self.networkManager = networkManager
+//    }
     
-    init(networkManager: NetworkManagerProtocol = NetworkManager()) {
-        self.networkManager = networkManager
-    }
-    
-    func login(request: LoginRequest, completion: @escaping LoginResult) {
+    func login(request: LoginRequest, completion: @escaping CompletionHandler<User>) {
+        
         let endpoint = "https://dummyjson.com/auth/login"
-        networkManager.post(urlString: endpoint, body: request, completion: completion)
+        let postData: [String : Any] = [
+            "username" : request.username,
+            "password" : request.password,
+            "expiresInMins" : request.expiresInMins
+        ]
+        NetworkManager.shared.request(
+                    urlString: endpoint,
+                    method: .post,
+                    body: postData,
+                    completion: completion
+                )
     }
+    
 }
